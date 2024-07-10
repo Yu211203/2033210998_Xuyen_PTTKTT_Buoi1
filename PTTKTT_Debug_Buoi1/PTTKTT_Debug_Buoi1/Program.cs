@@ -61,8 +61,15 @@ namespace PTTKTT_Debug_Buoi1
 
                     Console.Write(" " + numbers[i]);
                 }
-            
-            Console.ReadKey();
+
+                int sum = 0;
+                for (int i = 0; i < numbers.Length - 1; i++)
+                {
+                    sum += numbers[i];
+                   
+                } Console.Write("\nTong mang = " + sum);
+
+                    Console.ReadKey();
         
         }
     }
