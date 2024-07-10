@@ -8,6 +8,85 @@ namespace PTTKTT_Debug_Buoi1
 {
     class Program
     {
+        //MergeSort
+        public static void mergeSort(int[] arr)
+        {
+            
+            if (arr.Length <= 1)
+                return;
+
+            int mid = arr.Length / 2;
+
+            int[] left = new int[mid];
+            int[] right = new int[arr.Length - mid];
+
+            for (int i = 0; i < mid; i++)
+                left[i] = arr[i];
+
+            for (int i = mid; i < arr.Length; i++)
+                right[i - mid] = arr[i];
+
+            mergeSort(left);
+            mergeSort(right);
+
+            Merge(arr, left, right);
+        }
+
+        private static void Merge(int[] arr, int[] left, int[] right)
+        {
+            int i = 0, j = 0, k = 0;
+
+            while (i < left.Length && j < right.Length)
+            {
+                if (left[i] <= right[j])
+                    arr[k++] = left[i++];
+                else
+                    arr[k++] = right[j++];
+            }
+
+            while (i < left.Length)
+                arr[k++] = left[i++];
+
+            while (j < right.Length)
+                arr[k++] = right[j++];
+        }
+
+        // QuickSort
+        
+        
+       public static void Sort(int[] arr, int left, int right)
+        {
+            if (left < right)
+            {
+                int pivot = Partition(arr, left, right);
+
+                Sort(arr, left, pivot - 1);
+                Sort(arr, pivot + 1, right);
+            }
+        }
+
+        private static int Partition(int[] arr, int left, int right)
+        {
+            int pivot = arr[right];
+            int i = left - 1;
+
+            for (int j = left; j < right; j++)
+            {
+                if (arr[j] <= pivot)
+                {
+                    i++;
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
+                }
+            }
+
+            int temp1 = arr[i + 1];
+            arr[i + 1] = arr[right];
+            arr[right] = temp1;
+
+            return i + 1;
+        }
         static void Main(string[] args)
         {
             Console.Title = "Selection Sort";
@@ -68,6 +147,45 @@ namespace PTTKTT_Debug_Buoi1
                     sum += numbers[i];
                    
                 } Console.Write("\nTong mang = " + sum);
+
+                Console.Write("\nMerge Sort");
+
+                int[] ints = { 8, 875, 7, 9, 764, 55 };
+
+                Console.Write("\nOriginal array: ");
+                foreach (int i in ints)
+                {
+                    Console.Write(" "+i);
+                }
+
+//MergeSortMain
+                mergeSort(ints);
+
+                Console.Write("\nSorted array: ");
+
+                foreach (int i in ints)
+                {
+                    Console.Write(" "+i);
+                }
+
+                Console.Write("\nQuick Sort");
+                int[] intss = { 8, 875, 7, 9, 764, 55 };
+
+                Console.Write("\nOriginal array:");
+                foreach (int i in intss)
+                {
+                    Console.Write(" "+i);
+                }
+
+
+                Sort(intss, 0, 5);
+
+                Console.Write("\nSorted array:");
+
+                foreach (int i in intss)
+                {
+                    Console.Write(" "+i);
+                }
 
                     Console.ReadKey();
         
